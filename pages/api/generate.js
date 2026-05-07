@@ -1,7 +1,4 @@
-import { GoogleGenerativeAI } from '@google/generative-ai'
 import { supabase } from '../../lib/supabase'
-
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end()
@@ -35,15 +32,22 @@ Return ONLY a valid JSON array, no markdown, no explanation, no backticks:
   {"question": "question text", "answer": "detailed worked answer", "difficulty": "medium"},
   {"question": "question text", "answer": "detailed worked answer", "difficulty": "medium"},
   {"question": "question text", "answer": "detailed worked answer", "difficulty": "hard"}
-]
-
-difficulty must be exactly: easy, medium, or hard
-Be specific to ${level} curriculum standards.`
+]`
 
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
-    const result = await model.generateContent(prompt)
-    const text = result.response.text().trim()
+    const apiKey = process.env.GEMINI_API_KEY
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`
+    
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }]
+      })
+    })
+
+    const data = await response.json()
+    const text = data.candidates[0].content.parts[0].text.trim()
     const cleaned = text.replace(/^```[a-z]*\n?/i, '').replace(/```$/, '').trim()
     const generated = JSON.parse(cleaned)
 
