@@ -1,0 +1,66 @@
+.card {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  transition: border-color 0.15s;
+}
+.card:hover { border-color: #ccc; }
+
+.badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.badge {
+  font-size: 11px;
+  padding: 2px 9px;
+  border-radius: 99px;
+  font-weight: 500;
+}
+.subject { background: #E1F5EE; color: #085041; }
+.level   { background: #EEEDFE; color: #3C3489; }
+.easy    { background: #EAF3DE; color: #27500A; }
+.medium  { background: #FAEEDA; color: #633806; }
+.hard    { background: #FCEBEB; color: #791F1F; }
+
+.question {
+  font-size: 14px;
+  color: #1a1a1a;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.topic {
+  font-size: 12px;
+  color: #888;
+}
+.answerBtn {
+  height: 28px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: transparent;
+  font-size: 12px;
+  color: #555;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.answerBtn:hover { background: #f5f5f5; }
+
+.answerBox {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #444;
+  line-height: 1.6;
+}
+.answerBox strong { color: #1a1a1a; }
